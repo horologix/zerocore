@@ -56,8 +56,8 @@ var Application = function() {
 
         self.routes['/'] = function(req, res) {
 						res.redirect("google.com");
-						#res.setHeader('Content-Type', 'text/html');
-						#res.send(self.cache_get('index.html') );
+						//res.setHeader('Content-Type', 'text/html');
+						//res.send(self.cache_get('index.html') );
         };
     };
 
