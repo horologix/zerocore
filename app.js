@@ -23,7 +23,7 @@ function initializeRoutes() {
     routes["/"] = function(req, res) {
         
         res.setHeader("Content-Type", "text/html");
-        res.send(cache["index.html"]);
+        res.send("for the love of..."+cache["index.html"]);
     };
 }
 
