@@ -1,7 +1,7 @@
 #!/bin/env node
 var express = require('express');
 var fs      = require('fs');
-
+var app     = require("./app.js");
 
 var Application = function() {
 
@@ -60,13 +60,13 @@ var Application = function() {
         };
 
         self.routes['/tx/:tx_id'] = function(req, res) {
-            res.send("you're attempting to access... "+res.params.tx_id);
+            res.send("you're attempting to access... "+req.params.tx_id);
         };
     };
 
     self.initializeServer = function() {
         self.createRoutes();
-        self.app = express.createServer();
+        self.app = express();
 
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
@@ -90,7 +90,5 @@ var Application = function() {
 
 };
 
-var zapp = new Application();
-zapp.initialize();
-zapp.start();
-
+app.initialize();
+app.start();
