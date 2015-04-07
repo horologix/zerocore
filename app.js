@@ -1,7 +1,6 @@
-#!/bin/env/node
-
 var express = require("express");
 var fs      = require("fs");
+var api     = require("./api_chain");
 
 function initializeEnvironment() {
     
@@ -14,6 +13,7 @@ function initializeCache() {
     cache = {};
 
     cache["index.html"] = fs.readFileSync("./index.html");
+    cache["main.js"]    = fs.readFileSync("./client/main.js");
 }
 
 function initializeRoutes() {
@@ -23,7 +23,20 @@ function initializeRoutes() {
     routes["/"] = function(req, res) {
         
         res.setHeader("Content-Type", "text/html");
-        res.send("for the love of..."+cache["index.html"]);
+        res.send(cache["index.html"]);
+    };
+
+    routes["/main.js"] = function(req, res) {
+        
+        res.send(cache["main.js"]);
+    };;
+
+    routes["/tx/:tx_id"] = function(req, res) {
+    
+        api.getTX(req.params.tx_id).then(function(data){
+            
+            res.send(data);
+        });
     };
 }
 
