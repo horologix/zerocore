@@ -12,7 +12,7 @@ function initializeCache() {
 
     cache = {};
 
-    cache["index.html"] = fs.readFileSync("./index.html");
+    cache["index.html"] = fs.readFileSync("./public/index.html");
     cache["main.js"]    = fs.readFileSync("./client/main.js");
 }
 
@@ -28,12 +28,13 @@ function initializeRoutes() {
 
     routes["/main.js"] = function(req, res) {
         
+        res.setHeader("Content-Type", "application/javascript");
         res.send(cache["main.js"]);
     };;
 
     routes["/tx/:tx_id"] = function(req, res) {
     
-        api.getTX(req.params.tx_id).then(function(data){
+        api.getTx(req.params.tx_id).then(function(data){
             
             res.send(data);
         });
@@ -43,6 +44,7 @@ function initializeRoutes() {
 function initializeServer() {
 
     app = express();
+    app.use(express.static("public"));
     
     for(var r in routes) {
         
