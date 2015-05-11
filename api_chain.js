@@ -6,7 +6,7 @@ var API_USER     = "9c283baf11954a2c45c0f8199505ac14",
     API_HOST     = "api.chain.com",
     API_TX_PATH  = "/v2/bitcoin/transactions/";
 
-function getTX(tx_hash) {
+function getTx(tx_hash) {
 
     return new Promise(function(fulfill, reject){
     
@@ -23,13 +23,37 @@ function getTX(tx_hash) {
             response.on("data", function(chunk) {data += chunk;});
             response.on("end", function() {
                 
-                fulfill(data);
+                fulfill(formatTx(data));
             });
         });
     });
 }
 
+function formatTx(data) {
+
+    data = JSON.parse(data);
+    var tx = {};
+
+    tx.tx_hash = data.hash;
+    tx.block_index = data.block_height;
+    tx.value = data.amount;
+
+    tx.outputs = [];
+    for(var i = 0; i < data.outputs.length; i++) {
+        
+        var o = data.outputs[i];
+        var output = {};
+        output.value = o.value;
+        output.addresses = o.addresses;
+        output.spent = o.spent;
+        output.tx_hash = o.spending_transaction;
+        tx.outputs.push(output);
+    }
+
+    return tx;
+}
+
 module.exports = {
 
-    getTX: getTX
+    getTx: getTx
 };
