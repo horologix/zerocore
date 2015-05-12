@@ -27,6 +27,16 @@ html, body {
     text-transform:uppercase;
 }
 
+.info {
+    position:absolute;
+    bottom:0; left:0;
+    padding:1em;
+    color:rgba(255,255,255,.62);
+    font-size:1.1em;
+    line-height:1.35;
+    #text-transform:uppercase;
+}
+
 .howto {
     position:absolute;
     bottom:0; right:0;
