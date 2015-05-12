@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Slabo+27px);
 
 html {
-    background:url("bg.png");
+    background:url("bg.png"), #242730;
 
     font-size:14px;
     font-family: "Slabo 27px", sans-serif;
