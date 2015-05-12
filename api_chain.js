@@ -1,4 +1,5 @@
 var http = require("http");
+var fs = require("fs");
 var Promise = require("promise");
 
 var API_USER     = "9c283baf11954a2c45c0f8199505ac14",
@@ -7,6 +8,14 @@ var API_USER     = "9c283baf11954a2c45c0f8199505ac14",
     API_TX_PATH  = "/v2/bitcoin/transactions/";
 
 function getTx(tx_hash) {
+
+    if(fs.existsSync("local/"+tx_hash+".json")) {
+        var data = fs.readFileSync("local/"+tx_hash+".json");
+        return new Promise(function(fulfill, reject) {
+            
+            fulfill(formatTx(data));
+        });
+    }
 
     return new Promise(function(fulfill, reject){
     
@@ -23,6 +32,7 @@ function getTx(tx_hash) {
             response.on("data", function(chunk) {data += chunk;});
             response.on("end", function() {
                 
+                fs.writeFileSync("local/"+tx_hash+".json", data);
                 fulfill(formatTx(data));
             });
         });
