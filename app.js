@@ -13,7 +13,7 @@ function initializeCache() {
     cache = {};
 
     cache["index.html"] = fs.readFileSync("./public/index.html");
-    cache["main.js"]    = fs.readFileSync("./client/main.js");
+    //cache["main.js"]    = fs.readFileSync("./client/main.js");
 }
 
 function initializeRoutes() {
@@ -29,7 +29,7 @@ function initializeRoutes() {
     routes["/main.js"] = function(req, res) {
         
         res.setHeader("Content-Type", "application/javascript");
-        res.send(cache["main.js"]);
+        res.send("...");
     };;
 
     routes["/tx/:tx_id"] = function(req, res) {
