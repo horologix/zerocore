@@ -1,3 +1,58 @@
+@import url(http://fonts.googleapis.com/css?family=Marcellus);
+@import url(http://fonts.googleapis.com/css?family=Slabo+27px);
+
 html {
     background:url("bg.png");
+
+    font-size:14px;
+    font-family: "Slabo 27px", sans-serif;
+    letter-spacing:.05em;
+}
+
+html, body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+}
+
+.logo {
+    position:absolute;
+    top:0; left:0;
+    padding:1em;
+    pointer-events:none;
+    color:#fff;
+    font-family: "Marcellus", sans-serif;
+    font-size:1.2em;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+}
+
+.howto {
+    position:absolute;
+    bottom:0; right:0;
+    padding:1em;
+    color:rgba(255,255,255,.62);
+    font-size:1.1em;
+    line-height:1.35;
+    #text-transform:uppercase;
+}
+
+.tooltip {
+    position:absolute;
+    top:0; left:0;
+    padding:1em;
+
+    background:#3a414b;
+    pointer-events:none;
+    opacity:0;
+
+    color:#fff;
+}
+
+.value {
+    font-size:1.6em;
+}
+
+.details {
+    color:rgba(255,255,255,.62);
 }
