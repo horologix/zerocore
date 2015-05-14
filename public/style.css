@@ -59,6 +59,8 @@ html, body {
     color:#fff;
 }
 
+.tooltip .action {color:#fff;}
+
 .value {
     font-size:1.6em;
 }
