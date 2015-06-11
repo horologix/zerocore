@@ -50,6 +50,9 @@ function initializeServer() {
         
         app.get(r, routes[r]);
     }
+    app.use(function(req, res){
+        res.send("{error: 1}");
+    });
 }
 
 function initialize() {

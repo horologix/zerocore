@@ -42,11 +42,20 @@ function getTx(tx_hash) {
 function formatTx(data) {
 
     data = JSON.parse(data);
+    if(data.code !== undefined)
+        return {error: 1};
     var tx = {};
 
     tx.tx_hash = data.hash;
     tx.block_index = data.block_height;
     tx.value = data.amount;
+    
+    var time = data.block_time.substring(0,data.block_time.length-1).split("T");
+    
+    tx.date = time[0];
+    tx.time = time[1];
+
+    tx.confirms = data.confirmations;
 
     tx.outputs = [];
     for(var i = 0; i < data.outputs.length; i++) {
